@@ -127,7 +127,9 @@ class _NovaHomePageState extends State<NovaHomePage> {
           .replaceAll('%', '/100');
 
       final parsed = GrammarParser().parse(normalized);
-      final value = RealEvaluator(ContextModel()).evaluate(parsed);
+     
+final value = parsed.evaluate(EvaluationType.REAL, ContextModel()) as num;
+
 
       if (!value.isFinite) {
         _result = 'Undefined';
