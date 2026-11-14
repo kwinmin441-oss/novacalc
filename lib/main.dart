@@ -253,60 +253,73 @@ final value = parsed.evaluate(EvaluationType.REAL, ContextModel()) as num;
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
-          Expanded(
-            flex: 3,
-            child: Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(22),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(24),
-                gradient: const LinearGradient(
-                  colors: [Color(0xFF14253C), Color(0xFF10152A)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                border: Border.all(color: neon.withValues(alpha: 0.25)),
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  const Text(
-                    'SMART CALCULATOR',
-                    style: TextStyle(
-                      color: neon,
-                      fontSize: 11,
-                      letterSpacing: 2,
-                    ),
-                  ),
-                  const Spacer(),
-                  SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    reverse: true,
-                    child: Text(
-                      _expression.isEmpty ? '0' : _expression,
-                      style: const TextStyle(
-                        fontSize: 28,
-                        color: Colors.white70,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 14),
-                  FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      _result,
-                      style: const TextStyle(
-                        fontSize: 42,
-                        fontWeight: FontWeight.bold,
-                        color: neon,
-                      ),
-                    ),
-                  ),
-                ],
+      
+Expanded(
+  flex: 3,
+  child: LayoutBuilder(
+    builder: (context, constraints) {
+      final compact = constraints.maxHeight < 160;
+
+      return Container(
+        width: double.infinity,
+        padding: EdgeInsets.all(compact ? 8 : 22),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(24),
+          gradient: const LinearGradient(
+            colors: [
+              Color(0xFF14253C),
+              Color(0xFF10152A),
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+          ),
+          border: Border.all(
+            color: neon.withValues(alpha: 0.25),
+          ),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Text(
+              'SMART CALCULATOR',
+              style: TextStyle(
+                color: neon,
+                fontSize: compact ? 9 : 11,
+                letterSpacing: compact ? 1 : 2,
               ),
             ),
-          ),
+            SizedBox(height: compact ? 4 : 12),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              reverse: true,
+              child: Text(
+                _expression.isEmpty ? '0' : _expression,
+                style: TextStyle(
+                  fontSize: compact ? 18 : 28,
+                  color: Colors.white70,
+                ),
+              ),
+            ),
+            SizedBox(height: compact ? 4 : 14),
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Text(
+                _result,
+                style: TextStyle(
+                  fontSize: compact ? 28 : 42,
+                  fontWeight: FontWeight.bold,
+                  color: neon,
+                ),
+              ),
+            ),
+          ],
+        ),
+      );
+    },
+  ),
+),
+
           const SizedBox(height: 16),
           Expanded(
             flex: 5,
