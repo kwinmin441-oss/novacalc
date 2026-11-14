@@ -1,4 +1,4 @@
-
+```yaml
 name: NovaCalc Android Build
 
 on:
@@ -31,32 +31,11 @@ jobs:
 
       - name: Generate Android platform
         run: flutter create --org com.novacalc --platforms=android .
-        
+
       - name: Fix Android Gradle Plugin
         run: |
+          grep -n 'com.android.application' android/settings.gradle
           sed -i 's/9\.3\.1/9.3.2/g' android/settings.gradle
           grep -n 'com.android.application' android/settings.gradle
 
-
-      - name: Install dependencies
-        run: flutter pub get
-
-      - name: Analyze code
-        run: flutter analyze --no-fatal-infos
-
-      - name: Run tests
-        run: flutter test
-
-      - name: Build APK
-        run: flutter build apk --release
-
-      - name: Build App Bundle
-        run: flutter build appbundle --release
-
-      - name: Upload release artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: NovaCalc-Android-Release
-          path: |
-            build/app/outputs/flutter-apk/app-release.apk
-            build/app/outputs/bundle/release/app-release.aab
+      - name
