@@ -10,7 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  google_mobile_ads: ^6.0.0
+  google_mobile_ads: ^7.0.0
   shared_preferences: ^2.5.3
   math_expressions: ^2.7.0
 
