@@ -31,6 +31,12 @@ jobs:
 
       - name: Generate Android platform
         run: flutter create --org com.novacalc --platforms=android .
+        
+      - name: Fix Android Gradle Plugin
+        run: |
+          sed -i 's/9\.3\.1/9.3.2/g' android/settings.gradle
+          grep -n 'com.android.application' android/settings.gradle
+
 
       - name: Install dependencies
         run: flutter pub get
